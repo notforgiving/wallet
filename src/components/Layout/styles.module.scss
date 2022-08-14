@@ -1,0 +1,10 @@
+@import "src/styles/variables";
+
+.layout {
+  background: #fdfdfd;
+  background: linear-gradient(180deg, #fdfdfd 0%, rgba(240, 240, 240, 1) 100%);
+  min-height: 100vh;
+  padding: 0 10px;
+  display: grid;
+  grid-template-rows: auto 110px;
+}

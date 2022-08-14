@@ -1,0 +1,45 @@
+@import "src/styles/variables";
+
+.grid {
+  padding: 10px;
+}
+
+.card {
+  width: 100%;
+  height: 200px;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+
+  &:global(.yellow) {
+    background-color: $yellow;
+  }
+
+  &:global(.green) {
+    background-color: $green;
+  }
+
+  &:global(.blue) {
+    background-color: $blue;
+  }
+
+  strong {
+    display: block;
+    text-align: center;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    font-size: 40px;
+    font-weight: 600;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

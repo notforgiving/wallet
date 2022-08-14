@@ -1,0 +1,43 @@
+@import url(./styles/_reset.scss);
+@import url(./styles/_variables.scss);
+@import url("https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap");
+
+body {
+  font-family: "Maven Pro", sans-serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  min-width: 320px;
+}
+
+.MuiFormControl-root {
+  width: 100%;
+  margin-bottom: 10px !important;
+}
+
+.MuiFormLabel-root {
+  color: #141318 !important;
+  text-transform: uppercase;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  font-family: "Maven Pro", sans-serif !important;
+}
+
+.MuiInputBase-input {
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.MuiInputBase-root {
+  background: #fff;
+
+  &:hover {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #ffffff00 !important;
+    }
+  }
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: #ffffff00 !important;
+  box-shadow: 0px 7px 11px 0px #0000000d;
+}

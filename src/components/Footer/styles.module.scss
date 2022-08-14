@@ -1,0 +1,51 @@
+@import "src/styles/variables";
+
+.footer {
+  padding: 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    svg {
+      vertical-align: middle;
+      color: $black;
+    }
+  }
+
+  .link {
+    flex: 1;
+    text-align: center;
+    svg {
+      transition: 0.5s;
+    }
+
+    &:global(.isActive) {
+      svg {
+        fill: $green;
+      }
+    }
+  }
+
+  .main_link {
+    flex: none;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: $black;
+    transition: 0.5s;
+    margin: 0 20px;
+
+    &:global(.isActive) {
+      box-shadow: -1px 5px 9px 0px #141318a8;
+    }
+
+    svg {
+      width: 30px;
+      color: $white;
+    }
+  }
+}

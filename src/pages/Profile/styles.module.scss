@@ -1,0 +1,36 @@
+@import "src/styles/variables";
+
+.profile {
+  padding: 10px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .welcome {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-gap: 0 10px;
+
+  .register {
+    background-color: lighten($color: $black, $amount: 45%);
+
+    &:hover {
+      background-color: lighten($color: $black, $amount: 35%);
+    }
+  }
+
+  .logout {
+    background-color: $pink;
+    &:hover {
+      background-color: darken($color: $pink, $amount: 15%);
+    }
+  }
+}
