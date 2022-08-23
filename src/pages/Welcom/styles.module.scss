@@ -4,7 +4,7 @@ $paddingBottomCard: 60px;
 
 .body {
   background-color: #141318;
-  min-height: 100vh;
+  min-height: calc(100vh - 120px);
   color: #fff;
   padding: 20px;
   display: flex;
