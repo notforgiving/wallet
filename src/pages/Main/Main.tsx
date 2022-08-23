@@ -7,8 +7,7 @@ import cn from 'classnames';
 import { formatPrice } from "../../helpers/formatPrice";
 
 const Main = () => {
-  const wallet = useSelector((state: TInitialState) => state.wallet);
-  console.log(wallet,'wallet');
+  const wallet = useSelector((state: TInitialState) => state);
   
   const economy = formatPrice(String(wallet.total - (wallet.inDay * (wallet.daysPayday + 1))));
   const total = formatPrice(String(wallet.total))

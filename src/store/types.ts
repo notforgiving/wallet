@@ -1,8 +1,6 @@
 export type TInitialState = {
-    wallet: {
-        total: number,
-        inDay: number,
-        payDay: number | Date,
-        daysPayday: number,
-    }
+    total: number,
+    inDay: number,
+    payDay: Date,
+    daysPayday: number,
 }

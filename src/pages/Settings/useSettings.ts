@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { setData } from "../../store/reducer";
@@ -6,15 +6,26 @@ import { TInitialState } from "../../store/types";
 
 export const useSettings = () => {
   const dispatch = useDispatch();
-  const wallet = useSelector((state: TInitialState) => state.wallet);
+  const wallet = useSelector((state: TInitialState) => state);
 
-  const [payDay, setPaytDay] = useState<Date | null>(new Date(wallet.payDay));
-  const [daysPayday, setDaysPayday] = useState(wallet.daysPayday);
-  
+  const [total, setTotal] = useState(wallet.total);
+  const [inDay, setInDay] = useState(wallet.inDay);
+  const [payDay, setPayDay] = useState(new Date());
+  const [daysPayday, setDaysPayday] = useState(0);
+
+  useEffect(() => {
+    setPayDay(wallet.payDay)
+    setDaysPayday(wallet.daysPayday)
+  }, [wallet])
+
+  useEffect(()=>{
+    clacDaysPayday(null)
+  },[payDay])
+
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      total: Number(wallet.total),
-      inDay: Number(wallet.inDay)
+      total: total,
+      inDay: inDay
     }
   });
 
@@ -29,13 +40,20 @@ export const useSettings = () => {
     );
   };
 
-  const handleChangePayday = (newValue: Date | null) => {
-    setPaytDay(newValue);
+  const clacDaysPayday = (newValue: Date | null) => {
+    const oneDay = 1000 * 60 * 60 * 24;
+    let diffInTime =  payDay.getTime() - new Date().getTime();
     if (newValue) {
-      const oneDay = 1000 * 60 * 60 * 24;
-      const diffInTime = newValue.getTime() - new Date().getTime();
-      const diffInDays = Math.round(diffInTime / oneDay);
-      setDaysPayday(diffInDays);
+      diffInTime =  newValue.getTime() - new Date().getTime();
+    }
+    const diffInDays = Math.round(diffInTime / oneDay);
+    setDaysPayday(diffInDays);
+  }
+
+  const handleChangePayday = (newValue: Date | null) => {
+    if (newValue) {
+      setPayDay(newValue);
+      clacDaysPayday(newValue)
     }
   };
 
