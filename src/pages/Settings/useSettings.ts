@@ -31,17 +31,19 @@ export const useSettings = () => {
   });
 
   const onSubmit = (data: any) => {
+    if (data.total !== total) {
+      dispatch(
+        setChanges([
+          ...wallet_changes,
+          {
+            date: new Date(),
+            waste: data.total - total,
+            remainder: data.total
+          }
+        ])
+      )
+    }
 
-    dispatch(
-      setChanges([
-        ...wallet_changes,
-        {
-          date: new Date(),
-          waste: data.total - total,
-          remainder: data.total
-        }
-      ])
-    )
     dispatch(
       setMain({
         total: data.total,
