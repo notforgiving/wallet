@@ -5,11 +5,48 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
   .welcome {
     text-align: center;
     font-size: 30px;
     font-weight: 600;
+    margin-bottom: 20px;
+  }
+}
+
+.table {
+  flex: 1;
+  overflow-y: scroll;
+  max-height: 475px;
+  table {
+    width: 100%;
+    border: 1px solid #b6c9ed;
+    border-collapse: collapse;
+  }
+  table thead {
+    background: #c8e6c980;
+    height: 50px;
+  }
+  table th {
+    font-weight: bold;
+    padding: 5px;
+    border: none;
+  }
+  table tr {
+    height: 50px;
+    border-bottom: 1px solid #b6c9ed;
+  }
+  table td {
+    padding: 5px;
+    border: none;
+    text-align: center;
+  }
+
+  .green {
+    color: green;
+  }
+  .red {
+    color: red;
   }
 }
 

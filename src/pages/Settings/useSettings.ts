@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setData } from "../../store/reducer";
+import { setMain, setChanges } from "../../store/reducer";
 import { TInitialState } from "../../store/types";
 
 export const useSettings = () => {
   const dispatch = useDispatch();
-  const wallet = useSelector((state: TInitialState) => state);
+  const wallet = useSelector((state: TInitialState) => state.wallet);
+  const wallet_changes = useSelector((state: TInitialState) => state.walletChanges);
 
   const [total, setTotal] = useState(wallet.total);
   const [inDay, setInDay] = useState(wallet.inDay);
@@ -18,9 +19,9 @@ export const useSettings = () => {
     setDaysPayday(wallet.daysPayday)
   }, [wallet])
 
-  useEffect(()=>{
+  useEffect(() => {
     clacDaysPayday(null)
-  },[payDay])
+  }, [payDay])
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -30,8 +31,19 @@ export const useSettings = () => {
   });
 
   const onSubmit = (data: any) => {
+
     dispatch(
-      setData({
+      setChanges([
+        ...wallet_changes,
+        {
+          date: new Date(),
+          waste: data.total - total,
+          remainder: data.total
+        }
+      ])
+    )
+    dispatch(
+      setMain({
         total: data.total,
         inDay: data.inDay,
         payDay,
@@ -42,9 +54,9 @@ export const useSettings = () => {
 
   const clacDaysPayday = (newValue: Date | null) => {
     const oneDay = 1000 * 60 * 60 * 24;
-    let diffInTime =  payDay.getTime() - new Date().getTime();
+    let diffInTime = payDay.getTime() - new Date().getTime();
     if (newValue) {
-      diffInTime =  newValue.getTime() - new Date().getTime();
+      diffInTime = newValue.getTime() - new Date().getTime();
     }
     const diffInDays = Math.round(diffInTime / oneDay);
     setDaysPayday(diffInDays);

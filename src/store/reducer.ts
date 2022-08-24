@@ -1,32 +1,41 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getLocalStorage } from "../helpers/getLocalStorage"
-import { TInitialState } from "./types"
+import { IChange, TInitialState } from "./types"
 
-const local = getLocalStorage('wallet');
+const local_wallet = getLocalStorage('wallet');
+const local_changes = getLocalStorage('wallet_changes');
+console.log(local_changes, 'local_changes');
 
 const initialState: TInitialState = {
-    total: local ? Number(local.total) : 0,
-    inDay: local ? Number(local.inDay) : 0,
-    payDay: local ? new Date(local.payDay) : new Date(),
-    daysPayday: local ? local.daysPayday : 0,
+    wallet: {
+        total: local_wallet ? Number(local_wallet.total) : 0,
+        inDay: local_wallet ? Number(local_wallet.inDay) : 0,
+        payDay: local_wallet ? new Date(local_wallet.payDay) : new Date(),
+        daysPayday: local_wallet ? local_wallet.daysPayday : 0,
+    },
+    walletChanges: local_changes ? local_changes : [] as IChange[]
 }
 
-const postsSlice = createSlice({
+const walletSlice = createSlice({
     name: 'wallet',
     initialState,
     reducers: {
-        setData(state, action) {
+        setMain(state, action) {
             state = {
                 ...action.payload
             }
             localStorage.setItem('wallet', JSON.stringify(action.payload));
         },
+        setChanges(state, action) {
+            state = action.payload
+            localStorage.setItem('wallet_changes', JSON.stringify(action.payload));
+        }
     },
 })
 
 
-const { actions, reducer } = postsSlice
+const { actions, reducer } = walletSlice
 
-export const { setData } = actions
+export const { setMain, setChanges } = actions
 
 export default reducer
